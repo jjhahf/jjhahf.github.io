@@ -101,8 +101,9 @@ const WISHES=[{"label":"万事顺意","message":"愿你今天遇到的每一件�
  const coarse=matchMedia('(pointer: coarse)');
  let width=1,height=1,dpr=1,time=0,last=0,frame=0,visible=true,running=false,gl=null,program=null,uniforms={},clickAt=-100;
  const mouse={x:.5,y:.55,tx:.5,ty:.55,inside:false},hit={x:.5,y:.62};
- const sparks=[];
- const seeds=Array.from({length:coarse.matches?35:65},()=>({phase:Math.random()*Math.PI*2,speed:.035+Math.random()*.065,radius:.6+Math.random()*.4,size:.45+Math.random()*1.05,alt:Math.random()}));
+ const sparks=[],rings=[];
+ let pointerDistance=0,lastPointer=null,renderAt=0;
+ const seeds=Array.from({length:coarse.matches?85:200},()=>({phase:Math.random()*Math.PI*2,radius:.42+Math.random()*.8,z:.22+Math.random()*2.4,size:.45+Math.random()*1.1,alt:Math.random()}));
  const vertex='attribute vec2 a_pos; varying vec2 v_uv; void main(){ v_uv=a_pos*.5+.5; gl_Position=vec4(a_pos,0.,1.); }';
  const fragment=`precision mediump float;
  varying vec2 v_uv;
@@ -112,22 +113,32 @@ const WISHES=[{"label":"万事顺意","message":"愿你今天遇到的每一件�
  void main(){
    vec2 uv=(v_uv-.5)*u_crop+.5;
    float lower=1.-smoothstep(.08,.78,uv.y);
-   uv.x+=sin(uv.y*10.+u_time*.28)*.005*lower;
-   uv.y+=sin(uv.x*8.-u_time*.24)*.005*lower;
+   uv.x+=sin(uv.y*9.+u_time*.65)*.015*lower;
+   uv.y+=sin(uv.x*7.-u_time*.56)*.012*lower;
    vec2 m=(u_mouse-.5)*u_crop+.5;
    vec2 delta=uv-m;
    float dist=length(delta);
-   uv+=delta/(dist+.05)*sin(dist*35.-u_time*1.6)*exp(-dist*6.)*.0028;
+   uv+=delta/(dist+.05)*sin(dist*28.-u_time*2.4)*exp(-dist*5.)*.009;
    float age=u_time-u_click;
    vec2 impact=v_uv-u_hit;
    float radius=length(impact);
-   float wave=exp(-pow((radius-age*.20)*18.,2.))*max(0.,1.-age/3.4)*step(0.,age);
-   uv+=impact/(radius+.02)*wave*.012;
+   float wave=exp(-pow((radius-age*.27)*16.,2.))*max(0.,1.-age/3.2)*step(0.,age);
+   uv+=impact/(radius+.02)*wave*.035;
    vec3 col=texture2D(u_image,clamp(uv,0.001,.999)).rgb;
-   col*=1.+sin(u_time*.35)*.055*lower;
-   col+=vec3(.19,.058,.022)*wave*.8;
+   col*=.82+sin(u_time*.65+uv.x*3.)*.14*lower;
+   vec2 orbit=(v_uv-vec2(.5,.23))*vec2(2.05,5.25);
+   float angle=atan(orbit.y,orbit.x),rad=length(orbit);
+   float band=1.+sin(angle*3.+u_time*.85)*.055+sin(angle*7.-u_time*.48)*.018;
+   float line=abs(rad-band);
+   float tail=exp(-mod(angle-u_time*.95+18.8496,6.2832)*3.4);
+   float tail2=exp(-mod(angle+u_time*.70+18.8496,6.2832)*4.8);
+   float energy=exp(-line*24.)*.055+exp(-line*150.)*(.18+tail*.7+tail2*.38);
+   float guard=1.-.88*exp(-pow((v_uv.x-.5)*3.8,4.))*smoothstep(.32,.65,v_uv.y);
+   col+=vec3(1.,.32,.12)*energy*guard;
+   col+=vec3(.65,.85,1.)*exp(-abs(rad-band-.055)*170.)*tail2*.13*guard;
+   col+=vec3(.36,.105,.035)*wave*.8;
    float light=exp(-length((v_uv-u_mouse)*vec2(1.,1.3))*8.);
-   col+=vec3(.018,.008,.006)*light;
+   col+=vec3(.035,.012,.006)*light;
    gl_FragColor=vec4(col,1.);
  }`;
  function makeShader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){gl.deleteShader(s);return null}return s}
@@ -163,21 +174,68 @@ const WISHES=[{"label":"万事顺意","message":"愿你今天遇到的每一件�
   gl.uniform2f(uniforms.u_mouse,mouse.x,1.-mouse.y);gl.uniform2f(uniforms.u_hit,hit.x,1.-hit.y);
   gl.drawArrays(gl.TRIANGLES,0,6);
  }
- function drawDust(dt){
-  ctx.clearRect(0,0,width,height);
-  ctx.globalCompositeOperation='lighter';
-  for(const p of seeds){
-   const a=p.phase+time*p.speed;
-   let x=width*(.5+Math.cos(a)*.47*p.radius),y=height*(.72+Math.sin(a)*.14*p.radius)+Math.sin(a*3+time*.2)*8;
-   if(mouse.inside){const dx=x-mouse.x*width,dy=y-mouse.y*height,dist=Math.hypot(dx,dy);if(dist<125&&dist>1){const force=(1-dist/125)*15;x+=dx/dist*force;y+=dy/dist*force}}
-   const alpha=(.16+.4*(Math.sin(a*2+time*.3)*.5+.5))*(p.alt>.7?1.3:1);
-   ctx.beginPath();ctx.arc(x,y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,${p.alt>.6?199:149},${p.alt>.6?169:115},${alpha})`;ctx.fill();
+ function copyGuard(x,y){
+  const nx=Math.abs(x/width-.5),ny=y/height;
+  return ny>.09&&ny<.66&&nx<.28?.1:1;
+ }
+ function orbitPoint(angle,band){
+  const radius=.9+band*.075,z=Math.sin(angle+band*.26),perspective=2.7/(2.7+z*.65);
+  const tilt=Math.sin(time*.23+band)*.045;
+  return {x:width*(.5+Math.cos(angle)*radius*.50*perspective)+(mouse.x-.5)*28,
+   y:height*(.77+Math.sin(angle+band*.11)*radius*(.15+band*.02)*perspective+Math.cos(angle)*tilt)+(mouse.y-.5)*15,z};
+ }
+ function drawOrbit(band){
+  const phase=time*(band%2?-.74:.91)+band*2.1,segments=coarse.matches?72:120;
+  ctx.beginPath();
+  for(let j=0;j<=segments;j++){const a=j/segments*Math.PI*2,p=orbitPoint(a,band);if(!j)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}
+  ctx.lineWidth=.55;ctx.strokeStyle=band===2?'rgba(156,195,240,.10)':'rgba(255,158,109,.16)';ctx.stroke();
+  const head=orbitPoint(phase,band),tailLength=.7;
+  // Short glowing arcs travel around three tilted rings, with perspective depth.
+  for(let k=0;k<3;k++){
+   ctx.beginPath();
+   for(let j=0;j<=20;j++){const a=phase-tailLength*(1-j/20),p=orbitPoint(a,band);if(!j)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}
+   const gradient=ctx.createLinearGradient(orbitPoint(phase-tailLength,band).x,orbitPoint(phase-tailLength,band).y,head.x,head.y);
+   gradient.addColorStop(0,'rgba(255,112,65,0)');gradient.addColorStop(.7,band===2?'rgba(132,191,240,.32)':'rgba(255,113,63,.55)');gradient.addColorStop(1,band===2?'rgba(217,239,255,.85)':'rgba(255,229,190,.92)');
+   ctx.strokeStyle=gradient;ctx.lineWidth=[12,4,1.3][k];ctx.globalAlpha=[.07,.30,.85][k];ctx.stroke();
   }
-  for(let i=sparks.length-1;i>=0;i--){const s=sparks[i];s.life-=dt;if(s.life<=0){sparks.splice(i,1);continue}s.x+=s.vx*dt;s.y+=s.vy*dt;s.vx*=Math.pow(.54,dt);s.vy*=Math.pow(.54,dt);const a=Math.min(1,s.life/.9);ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*.04,s.y-s.vy*.04);ctx.strokeStyle=`rgba(255,190,151,${a*.85})`;ctx.lineWidth=s.size;ctx.stroke()}
-  ctx.globalCompositeOperation='source-over';
+  ctx.globalAlpha=1;
+  const glow=ctx.createRadialGradient(head.x,head.y,0,head.x,head.y,14);
+  glow.addColorStop(0,'rgba(255,244,210,.9)');glow.addColorStop(.16,'rgba(255,190,132,.65)');glow.addColorStop(1,'rgba(255,95,50,0)');
+  ctx.fillStyle=glow;ctx.fillRect(head.x-14,head.y-14,28,28);
+ }
+ function projectStar(p){
+  const a=p.phase+time*.025,scale=1/(p.z+.35),dx=Math.cos(a)*p.radius,dy=Math.sin(a)*p.radius;
+  let x=width*(.5+dx*.50*scale)+(mouse.x-.5)*45*scale,y=height*(.55+dy*.60*scale)+(mouse.y-.5)*25*scale;
+  if(mouse.inside){const vx=mouse.x*width-x,vy=mouse.y*height-y,d=Math.hypot(vx,vy);if(d<170){const pull=(1-d/170)*.22;x+=vx*pull;y+=vy*pull}}
+  return {x,y,scale};
+ }
+ function drawDust(dt){
+  ctx.clearRect(0,0,width,height);ctx.globalCompositeOperation='lighter';
+  const boost=Math.max(0,1-(time-clickAt)/2.2);
+  for(const p of seeds){
+   const before=projectStar(p);p.z-=dt*(.11+boost*.6);
+   if(p.z<.05){p.z=2.6;p.phase=Math.random()*Math.PI*2;continue}
+   const at=projectStar(p);if(at.x<-40||at.x>width+40||at.y<-40||at.y>height+40)continue;
+   const opacity=Math.min(.75,.12+at.scale*.15)*copyGuard(at.x,at.y),stretch=2+at.scale*1.4+boost*3;
+   ctx.beginPath();ctx.moveTo(at.x,at.y);ctx.lineTo(at.x+(before.x-at.x)*stretch,at.y+(before.y-at.y)*stretch);
+   ctx.lineWidth=Math.min(1.6,p.size*at.scale*.5);ctx.strokeStyle=p.alt>.78?`rgba(173,209,255,${opacity})`:`rgba(255,${165+Math.round(p.alt*65)},${135+Math.round(p.alt*50)},${opacity})`;ctx.stroke();
+   if(at.scale>1.5){ctx.beginPath();ctx.arc(at.x,at.y,p.size*.65,0,Math.PI*2);ctx.fillStyle=`rgba(255,224,185,${opacity})`;ctx.fill()}
+  }
+  for(let band=0;band<3;band++)drawOrbit(band);
+  if(mouse.inside&&!coarse.matches){
+   const x=mouse.x*width,y=mouse.y*height,glow=ctx.createRadialGradient(x,y,0,x,y,80);
+   glow.addColorStop(0,'rgba(255,169,108,.1)');glow.addColorStop(1,'rgba(255,85,50,0)');ctx.fillStyle=glow;ctx.fillRect(x-80,y-80,160,160);
+   ctx.beginPath();ctx.arc(x,y,7+Math.sin(time*3)*1.5,time*.5,time*.5+Math.PI*1.5);ctx.strokeStyle='rgba(255,210,167,.50)';ctx.lineWidth=.7;ctx.stroke();
+  }
+  for(let i=rings.length-1;i>=0;i--){const r=rings[i];r.age+=dt;if(r.age>2.1){rings.splice(i,1);continue}const radius=r.age*Math.max(width,height)*.33,alpha=Math.pow(1-r.age/2.1,2)*.55;
+   ctx.save();ctx.translate(r.x,r.y);ctx.scale(1,.66);ctx.beginPath();ctx.arc(0,0,radius,0,Math.PI*2);ctx.lineWidth=1.4;ctx.strokeStyle=`rgba(255,196,140,${alpha})`;ctx.stroke();ctx.beginPath();ctx.arc(0,0,radius*.88,0,Math.PI*2);ctx.lineWidth=.5;ctx.strokeStyle=`rgba(178,211,255,${alpha*.6})`;ctx.stroke();ctx.restore();
+  }
+  for(let i=sparks.length-1;i>=0;i--){const s=sparks[i];s.life-=dt;if(s.life<=0){sparks.splice(i,1);continue}s.x+=s.vx*dt;s.y+=s.vy*dt;s.vx*=Math.pow(.62,dt);s.vy*=Math.pow(.62,dt);const a=Math.min(1,s.life/.8)*copyGuard(s.x,s.y);ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*.075,s.y-s.vy*.075);ctx.strokeStyle=`rgba(255,202,155,${a*.85})`;ctx.lineWidth=s.size;ctx.stroke()}
+  ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
  }
  function tick(now){
   if(!visible||document.hidden||reduced.matches){running=false;return}
+  if(coarse.matches&&now-renderAt<30){frame=requestAnimationFrame(tick);return}renderAt=now;
   const dt=Math.min((now-(last||now))/1000,.05);last=now;time+=dt;
   mouse.x+=(mouse.tx-mouse.x)*Math.min(1,dt*5);mouse.y+=(mouse.ty-mouse.y)*Math.min(1,dt*5);
   hero.style.setProperty('--pointer-x',((mouse.x-.5)*16).toFixed(2)+'px');hero.style.setProperty('--pointer-y',((mouse.y-.5)*10).toFixed(2)+'px');
@@ -188,13 +246,16 @@ const WISHES=[{"label":"万事顺意","message":"愿你今天遇到的每一件�
  function burst(x,y){
   if(reduced.matches)return;
   clickAt=time;hit.x=x/width;hit.y=y/height;
-  const count=coarse.matches?24:42;
-  for(let i=0;i<count;i++){const a=Math.PI*2*i/count,speed=50+Math.random()*130;sparks.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed*.65,life:.6+Math.random()*1.5,size:.6+Math.random()*.8})}
-  if(sparks.length>180)sparks.splice(0,sparks.length-180);
+  const count=coarse.matches?52:105;
+  rings.push({x,y,age:0});if(rings.length>5)rings.shift();
+  for(let i=0;i<count;i++){const a=Math.PI*2*i/count,speed=95+Math.random()*250;sparks.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed*.68,life:.8+Math.random()*1.8,size:.7+Math.random()*1.1})}
+  if(sparks.length>400)sparks.splice(0,sparks.length-400);
   resume();
  }
- hero.addEventListener('pointermove',e=>{if(coarse.matches||reduced.matches)return;const box=hero.getBoundingClientRect();mouse.tx=(e.clientX-box.left)/box.width;mouse.ty=(e.clientY-box.top)/box.height;mouse.inside=true},{passive:true});
- hero.addEventListener('pointerleave',()=>{mouse.tx=.5;mouse.ty=.55;mouse.inside=false});
+ hero.addEventListener('pointermove',e=>{if(coarse.matches||reduced.matches)return;const box=hero.getBoundingClientRect(),x=e.clientX-box.left,y=e.clientY-box.top;mouse.tx=x/box.width;mouse.ty=y/box.height;mouse.inside=true;
+  if(lastPointer){pointerDistance+=Math.hypot(x-lastPointer.x,y-lastPointer.y);if(pointerDistance>13){pointerDistance=0;for(let j=0;j<2;j++)sparks.push({x,y,vx:(Math.random()-.5)*35,vy:20+Math.random()*30,life:.3+Math.random()*.45,size:.5+Math.random()*.5})}}lastPointer={x,y};if(sparks.length>400)sparks.splice(0,sparks.length-400);
+ },{passive:true});
+ hero.addEventListener('pointerleave',()=>{mouse.tx=.5;mouse.ty=.55;mouse.inside=false;lastPointer=null});
  hero.addEventListener('pointerdown',e=>{if(e.target.closest('a,button,summary,input'))return;const box=hero.getBoundingClientRect();burst(e.clientX-box.left,e.clientY-box.top)},{passive:true});
  ignite.addEventListener('click',()=>burst(width*.5,height*.70));
  flow.addEventListener('webglcontextlost',e=>{e.preventDefault();gl=null;hero.removeAttribute('data-renderer')});
