@@ -1,0 +1,2367 @@
+{
+  "created_at": "2026-11-19T11:01:28+0800",
+  "model_sha256": "df036680a999fb458a98a634c94321615b55a038413b6f3d04136889dc21eb85",
+  "train_source_sha256": "90e055f1e6e6e03a4e04d9409fe8417a2085b6852daa862b60175480289b99b2",
+  "inference_source_sha256": "187c4fc1ca939e5bdfbf2c35bd1b860bb308793aa8ec0a05e5e2132097ac0910",
+  "dataset": {
+    "train": 230,
+    "val": 39,
+    "test": 66
+  },
+  "test_samples": 66,
+  "image_metrics": {
+    "accuracy": 0.8636363636363636,
+    "accuracy_wilson95": [
+      0.7607018517959349,
+      0.9265676265665311
+    ],
+    "precision": 0.7096774193548387,
+    "recall": 1.0,
+    "f1": 0.8301886792452831,
+    "auroc": 0.9679752066115702,
+    "true_negative": 35,
+    "false_positive": 9,
+    "false_negative": 0,
+    "true_positive": 22
+  },
+  "pixel_metrics": {
+    "dice": 0.854299718933006,
+    "iou": 0.7456572482791,
+    "auroc": 0.9868504171105695
+  },
+  "thresholds": {
+    "image_threshold": 0.4884294867515564,
+    "pixel_threshold": 0.7000000000000002,
+    "source": "validation split only; thresholds frozen before holdout evaluation",
+    "selected_epoch": 34,
+    "validation_loss": 1.3703326903856718,
+    "validation_samples": 39,
+    "score_source": "fused",
+    "score_selection": "best validation AUROC among three predeclared outputs; then validation F1 threshold; no holdout used",
+    "score_candidates": [
+      {
+        "source": "classifier",
+        "auroc": 0.9438502673796791,
+        "f1": 0.9090909090909091,
+        "threshold": 0.5681505799293518
+      },
+      {
+        "source": "segmentation",
+        "auroc": 0.9491978609625669,
+        "f1": 0.875,
+        "threshold": 0.48767414689064026
+      },
+      {
+        "source": "fused",
+        "auroc": 0.9572192513368983,
+        "f1": 0.9375,
+        "threshold": 0.4884294867515564
+      }
+    ]
+  },
+  "latency_ms": {
+    "preprocess_ms": {
+      "median": 11.645145990769379,
+      "p95": 13.415000001259614,
+      "min": 10.354124999139458,
+      "max": 14.437540987273678
+    },
+    "model_ms": {
+      "median": 34.48089650191832,
+      "p95": 41.16583325230749,
+      "min": 31.744334002723917,
+      "max": 79.71687501412816
+    },
+    "postprocess_ms": {
+      "median": 0.545978982700035,
+      "p95": 0.7472814977518283,
+      "min": 0.3774590149987489,
+      "max": 4.312082979595289
+    },
+    "pipeline_ms": {
+      "median": 46.910292003303766,
+      "p95": 55.51619750622194,
+      "min": 43.25070799677633,
+      "max": 94.91895799874328
+    }
+  },
+  "latency_scope": "66 held-out individual images after five warm-ups; CPU two threads; 192x192. Includes resize/normalization, neural inference and thresholding; excludes network, image-file read, camera, controller and robot, and PNG UI encoding.",
+  "platform": "macOS-14.6-arm64-arm-64bit-Mach-O",
+  "per_type": {
+    "bent": {
+      "count": 5,
+      "correct": 5,
+      "errors": 0
+    },
+    "color": {
+      "count": 5,
+      "correct": 5,
+      "errors": 0
+    },
+    "flip": {
+      "count": 6,
+      "correct": 6,
+      "errors": 0
+    },
+    "good": {
+      "count": 44,
+      "correct": 35,
+      "errors": 9
+    },
+    "scratch": {
+      "count": 6,
+      "correct": 6,
+      "errors": 0
+    }
+  },
+  "limitations": [
+    "Custom supervised split, not official unsupervised MVTec benchmark",
+    "No exact image hash overlap; independent production batch metadata unavailable",
+    "Single public product category; not a validation of actual factory equipment",
+    "Scores are not calibrated probabilities; errors are all retained"
+  ],
+  "rows": [
+    {
+      "path": "metal_nut/test/bent/007.png",
+      "original_split": "test",
+      "kind": "bent",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/bent/007_mask.png",
+      "sha256": "d4d7b761a2509da3db94973b57891c2911f7838adf0b5f9712bc190b2e34c0eb",
+      "score": 0.5382141619920731,
+      "classifier_score": 0.5874969959259033,
+      "segmentation_score": 0.4889313280582428,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "review",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.075666996883228,
+        "model_ms": 36.15283302497119,
+        "postprocess_ms": 0.5630829837173223,
+        "pipeline_ms": 49.79158300557174
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-000-bent.webp",
+        "prediction": "test-000-bent-prediction.png",
+        "truth": "test-000-bent-truth.png",
+        "heatmap": "test-000-bent-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/bent/008.png",
+      "original_split": "test",
+      "kind": "bent",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/bent/008_mask.png",
+      "sha256": "c6d03319a7706e0cb981472458966b8c38dd044829f5a92798a7bbe747ac14e4",
+      "score": 0.8275773823261261,
+      "classifier_score": 0.9062923789024353,
+      "segmentation_score": 0.7488623857498169,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.009684244791666666,
+      "box": [
+        0.3645833333333333,
+        0.125,
+        0.8020833333333334,
+        0.359375
+      ],
+      "timing": {
+        "preprocess_ms": 11.506875016493723,
+        "model_ms": 35.339790978468955,
+        "postprocess_ms": 0.5278750031720847,
+        "pipeline_ms": 47.37454099813476
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-001-bent.webp",
+        "prediction": "test-001-bent-prediction.png",
+        "truth": "test-001-bent-truth.png",
+        "heatmap": "test-001-bent-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/bent/000.png",
+      "original_split": "test",
+      "kind": "bent",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/bent/000_mask.png",
+      "sha256": "602cceb099d5aa10a416f31cd6370ef9d8c810118f4ada9dbc9c28e91a889e0b",
+      "score": 0.8589014410972595,
+      "classifier_score": 0.922405481338501,
+      "segmentation_score": 0.7953974008560181,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.014892578125,
+      "box": [
+        0.2552083333333333,
+        0.078125,
+        0.9322916666666666,
+        0.7083333333333334
+      ],
+      "timing": {
+        "preprocess_ms": 11.507791990879923,
+        "model_ms": 32.747416000347584,
+        "postprocess_ms": 0.6487920181825757,
+        "pipeline_ms": 44.90400000941008
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-002-bent.webp",
+        "prediction": "test-002-bent-prediction.png",
+        "truth": "test-002-bent-truth.png",
+        "heatmap": "test-002-bent-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/bent/003.png",
+      "original_split": "test",
+      "kind": "bent",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/bent/003_mask.png",
+      "sha256": "61a12376dbda815080604c73261d9e1d53abd207d41c6998b02f5db0a6de297b",
+      "score": 0.6564610302448273,
+      "classifier_score": 0.8007592558860779,
+      "segmentation_score": 0.5121628046035767,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.861792019568384,
+        "model_ms": 32.6761250034906,
+        "postprocess_ms": 0.4804579948540777,
+        "pipeline_ms": 44.01837501791306
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-003-bent.webp",
+        "prediction": "test-003-bent-prediction.png",
+        "truth": "test-003-bent-truth.png",
+        "heatmap": "test-003-bent-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/bent/020.png",
+      "original_split": "test",
+      "kind": "bent",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/bent/020_mask.png",
+      "sha256": "290823a52328b6ee0fb3c536747807223a7417f6194d7fe1f4da0c8a6dad1bf2",
+      "score": 0.8034694790840149,
+      "classifier_score": 0.9237185716629028,
+      "segmentation_score": 0.683220386505127,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.004530164930555556,
+      "box": [
+        0.6302083333333334,
+        0.13541666666666666,
+        0.8229166666666666,
+        0.6354166666666666
+      ],
+      "timing": {
+        "preprocess_ms": 10.556124994764104,
+        "model_ms": 33.243667014176026,
+        "postprocess_ms": 0.45495800441130996,
+        "pipeline_ms": 44.25475001335144
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-004-bent.webp",
+        "prediction": "test-004-bent-prediction.png",
+        "truth": "test-004-bent-truth.png",
+        "heatmap": "test-004-bent-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/color/013.png",
+      "original_split": "test",
+      "kind": "color",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/color/013_mask.png",
+      "sha256": "3f71cc272e5a9042498934ee832d56024767d68f165381d90da25fbc82ba93bf",
+      "score": 0.9620127081871033,
+      "classifier_score": 0.9363979697227478,
+      "segmentation_score": 0.9876274466514587,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.053059895833333336,
+      "box": [
+        0.19791666666666666,
+        0.23958333333333334,
+        0.8645833333333334,
+        0.875
+      ],
+      "timing": {
+        "preprocess_ms": 10.679375001927838,
+        "model_ms": 32.95699998852797,
+        "postprocess_ms": 0.518375018145889,
+        "pipeline_ms": 44.154750008601695
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-005-color.webp",
+        "prediction": "test-005-color-prediction.png",
+        "truth": "test-005-color-truth.png",
+        "heatmap": "test-005-color-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/color/005.png",
+      "original_split": "test",
+      "kind": "color",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/color/005_mask.png",
+      "sha256": "306320367c7cb2e8b847bbd44d1c21ab33bc3c14f2b6a2181ec3be674f8b9692",
+      "score": 0.763937383890152,
+      "classifier_score": 0.8845518827438354,
+      "segmentation_score": 0.6433228850364685,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.002224392361111111,
+      "box": [
+        0.5416666666666666,
+        0.11458333333333333,
+        0.640625,
+        0.16145833333333334
+      ],
+      "timing": {
+        "preprocess_ms": 10.86883299285546,
+        "model_ms": 32.434374996228144,
+        "postprocess_ms": 0.6563749921042472,
+        "pipeline_ms": 43.95958298118785
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-006-color.webp",
+        "prediction": "test-006-color-prediction.png",
+        "truth": "test-006-color-truth.png",
+        "heatmap": "test-006-color-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/color/000.png",
+      "original_split": "test",
+      "kind": "color",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/color/000_mask.png",
+      "sha256": "0baf957a972988323713a48fdf85c5e93cd3f21ac3d829095c13f703e6aed14b",
+      "score": 0.6499636769294739,
+      "classifier_score": 0.734657883644104,
+      "segmentation_score": 0.5652694702148438,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0018446180555555555,
+      "box": [
+        0.59375,
+        0.2604166666666667,
+        0.65625,
+        0.296875
+      ],
+      "timing": {
+        "preprocess_ms": 11.302167025860399,
+        "model_ms": 33.35024998523295,
+        "postprocess_ms": 0.5322500073816627,
+        "pipeline_ms": 45.18466701847501
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-007-color.webp",
+        "prediction": "test-007-color-prediction.png",
+        "truth": "test-007-color-truth.png",
+        "heatmap": "test-007-color-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/color/008.png",
+      "original_split": "test",
+      "kind": "color",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/color/008_mask.png",
+      "sha256": "9b6ad18663609b2fc428a948f56cd80718fdf6a267f1144e445e336dd0231a87",
+      "score": 0.8039360046386719,
+      "classifier_score": 0.8511013984680176,
+      "segmentation_score": 0.7567706108093262,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.007514105902777778,
+      "box": [
+        0.671875,
+        0.046875,
+        0.8958333333333334,
+        0.4375
+      ],
+      "timing": {
+        "preprocess_ms": 11.538749997271225,
+        "model_ms": 47.5657090137247,
+        "postprocess_ms": 0.5875409988220781,
+        "pipeline_ms": 59.692000009818
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-008-color.webp",
+        "prediction": "test-008-color-prediction.png",
+        "truth": "test-008-color-truth.png",
+        "heatmap": "test-008-color-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/color/018.png",
+      "original_split": "test",
+      "kind": "color",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/color/018_mask.png",
+      "sha256": "ab4ebad535f54e5ae341df9963cdfcd60055b1ad7654ec3d8a1391c6e4d2a824",
+      "score": 0.7453857660293579,
+      "classifier_score": 0.8931792378425598,
+      "segmentation_score": 0.597592294216156,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0014105902777777778,
+      "box": [
+        0.6770833333333334,
+        0.15625,
+        0.734375,
+        0.3802083333333333
+      ],
+      "timing": {
+        "preprocess_ms": 11.457332991994917,
+        "model_ms": 34.995042020455,
+        "postprocess_ms": 0.5772500007878989,
+        "pipeline_ms": 47.02962501323782
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-009-color.webp",
+        "prediction": "test-009-color-prediction.png",
+        "truth": "test-009-color-truth.png",
+        "heatmap": "test-009-color-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/flip/009.png",
+      "original_split": "test",
+      "kind": "flip",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/flip/009_mask.png",
+      "sha256": "01d582628771f1430709a932097854d916c859eb280cdddca307973f78a4a06c",
+      "score": 0.9610645473003387,
+      "classifier_score": 0.9644705653190613,
+      "segmentation_score": 0.9576585292816162,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.4882269965277778,
+      "box": [
+        0.08333333333333333,
+        0.07291666666666667,
+        0.9322916666666666,
+        0.9270833333333334
+      ],
+      "timing": {
+        "preprocess_ms": 11.412708001444116,
+        "model_ms": 34.55345900147222,
+        "postprocess_ms": 0.635291013168171,
+        "pipeline_ms": 46.60145801608451
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-010-flip.webp",
+        "prediction": "test-010-flip-prediction.png",
+        "truth": "test-010-flip-truth.png",
+        "heatmap": "test-010-flip-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/flip/022.png",
+      "original_split": "test",
+      "kind": "flip",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/flip/022_mask.png",
+      "sha256": "689670b6d26c396ae2617e33d64038e3f219037fb0f6ef738e1b617cfab78aba",
+      "score": 0.9592978060245514,
+      "classifier_score": 0.9660862684249878,
+      "segmentation_score": 0.952509343624115,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.4975857204861111,
+      "box": [
+        0.057291666666666664,
+        0.0625,
+        0.9375,
+        0.9427083333333334
+      ],
+      "timing": {
+        "preprocess_ms": 10.354124999139458,
+        "model_ms": 33.898458001203835,
+        "postprocess_ms": 0.7490419957321137,
+        "pipeline_ms": 45.00162499607541
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-011-flip.webp",
+        "prediction": "test-011-flip-prediction.png",
+        "truth": "test-011-flip-truth.png",
+        "heatmap": "test-011-flip-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/flip/002.png",
+      "original_split": "test",
+      "kind": "flip",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/flip/002_mask.png",
+      "sha256": "663dc37246c611dfd39e89d04fbe44eeb43bab8f247905b7dfa426667a4d4fab",
+      "score": 0.9691435098648071,
+      "classifier_score": 0.9613623023033142,
+      "segmentation_score": 0.9769247174263,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.4746907552083333,
+      "box": [
+        0.052083333333333336,
+        0.046875,
+        0.9479166666666666,
+        0.9322916666666666
+      ],
+      "timing": {
+        "preprocess_ms": 10.817208007210866,
+        "model_ms": 33.517709001898766,
+        "postprocess_ms": 0.5933750071562827,
+        "pipeline_ms": 44.928292016265914
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-012-flip.webp",
+        "prediction": "test-012-flip-prediction.png",
+        "truth": "test-012-flip-truth.png",
+        "heatmap": "test-012-flip-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/flip/012.png",
+      "original_split": "test",
+      "kind": "flip",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/flip/012_mask.png",
+      "sha256": "e233238da538abf9657cfd1e95acee1ca80bf51c65f203930c1a9b05706bd048",
+      "score": 0.965273380279541,
+      "classifier_score": 0.9625087976455688,
+      "segmentation_score": 0.9680379629135132,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.4691569010416667,
+      "box": [
+        0.0625,
+        0.057291666666666664,
+        0.953125,
+        0.9427083333333334
+      ],
+      "timing": {
+        "preprocess_ms": 11.941500008106232,
+        "model_ms": 38.01299998303875,
+        "postprocess_ms": 0.6646249967161566,
+        "pipeline_ms": 50.61912498786114
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-013-flip.webp",
+        "prediction": "test-013-flip-prediction.png",
+        "truth": "test-013-flip-truth.png",
+        "heatmap": "test-013-flip-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/flip/003.png",
+      "original_split": "test",
+      "kind": "flip",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/flip/003_mask.png",
+      "sha256": "3fc65b5a9fb842357ab67952cef7e6126e261c4cfd996fbc32df08ee20acfdb4",
+      "score": 0.9635893404483795,
+      "classifier_score": 0.9627110958099365,
+      "segmentation_score": 0.9644675850868225,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.4782443576388889,
+      "box": [
+        0.057291666666666664,
+        0.057291666666666664,
+        0.9479166666666666,
+        0.9375
+      ],
+      "timing": {
+        "preprocess_ms": 12.05074999597855,
+        "model_ms": 34.40833400236443,
+        "postprocess_ms": 0.5018329829908907,
+        "pipeline_ms": 46.96091698133387
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-014-flip.webp",
+        "prediction": "test-014-flip-prediction.png",
+        "truth": "test-014-flip-truth.png",
+        "heatmap": "test-014-flip-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/flip/017.png",
+      "original_split": "test",
+      "kind": "flip",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/flip/017_mask.png",
+      "sha256": "eb46f5ae247097f60de870e2a5ea1b19894db650cb27f8a21d6368b04b3be20c",
+      "score": 0.9608315229415894,
+      "classifier_score": 0.9663392901420593,
+      "segmentation_score": 0.9553237557411194,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.5105523003472222,
+      "box": [
+        0.052083333333333336,
+        0.052083333333333336,
+        0.9479166666666666,
+        0.9583333333333334
+      ],
+      "timing": {
+        "preprocess_ms": 11.023458006093279,
+        "model_ms": 32.101208984386176,
+        "postprocess_ms": 0.5112079961691052,
+        "pipeline_ms": 43.63587498664856
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-015-flip.webp",
+        "prediction": "test-015-flip-prediction.png",
+        "truth": "test-015-flip-truth.png",
+        "heatmap": "test-015-flip-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/009.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "8053b24c2fef17e040cb18f81eafaef33959991332df717783300905e525d97a",
+      "score": 0.45305900275707245,
+      "classifier_score": 0.41832154989242554,
+      "segmentation_score": 0.48779645562171936,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "review",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.793415993452072,
+        "model_ms": 36.310667026555166,
+        "postprocess_ms": 0.6876669940538704,
+        "pipeline_ms": 48.79175001406111
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-016-good.webp",
+        "prediction": "test-016-good-prediction.png",
+        "truth": "test-016-good-truth.png",
+        "heatmap": "test-016-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/010.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "f77e35d23046cdcd10d647d4eeeff54be41faa94371e07f526d169ccf234bcb3",
+      "score": 0.621530681848526,
+      "classifier_score": 0.6274476647377014,
+      "segmentation_score": 0.6156136989593506,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0005696614583333334,
+      "box": [
+        0.5885416666666666,
+        0.265625,
+        0.6927083333333334,
+        0.3385416666666667
+      ],
+      "timing": {
+        "preprocess_ms": 10.875291976844892,
+        "model_ms": 32.54433302208781,
+        "postprocess_ms": 0.51254199934192,
+        "pipeline_ms": 43.932166998274624
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-017-good.webp",
+        "prediction": "test-017-good-prediction.png",
+        "truth": "test-017-good-truth.png",
+        "heatmap": "test-017-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/014.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "9e094532fd66ad52c59c2e7bbcf67eace77202d363aa5050a7d79f0356c53e62",
+      "score": 0.3259599059820175,
+      "classifier_score": 0.29554855823516846,
+      "segmentation_score": 0.3563712537288666,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.72549999319017,
+        "model_ms": 33.44362499774434,
+        "postprocess_ms": 0.7005000079516321,
+        "pipeline_ms": 45.86962499888614
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-018-good.webp",
+        "prediction": "test-018-good-prediction.png",
+        "truth": "test-018-good-truth.png",
+        "heatmap": "test-018-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/001.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "d521ac790c921c26e635de69bab126d290def0c6674b961b4cb359a0bd8b8b01",
+      "score": 0.5061426013708115,
+      "classifier_score": 0.6054227352142334,
+      "segmentation_score": 0.4068624675273895,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "review",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.840000002644956,
+        "model_ms": 33.54287499678321,
+        "postprocess_ms": 0.6061659951228648,
+        "pipeline_ms": 44.98904099455103
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-019-good.webp",
+        "prediction": "test-019-good-prediction.png",
+        "truth": "test-019-good-truth.png",
+        "heatmap": "test-019-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/000.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "d7ca543f04733fb91ac02e18d0fbf06dcff554a1b1ad754173c42d10bb026bb6",
+      "score": 0.44350165128707886,
+      "classifier_score": 0.4795173704624176,
+      "segmentation_score": 0.4074859321117401,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "review",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.862833984196186,
+        "model_ms": 38.40666601900011,
+        "postprocess_ms": 0.48149999929592013,
+        "pipeline_ms": 50.75100000249222
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-020-good.webp",
+        "prediction": "test-020-good-prediction.png",
+        "truth": "test-020-good-truth.png",
+        "heatmap": "test-020-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/013.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "c16c2b4f4a4920276fb80a7b2c87f7197f02a3e68f05ace1647f0e1b9ba8b53e",
+      "score": 0.7081105709075928,
+      "classifier_score": 0.8071601986885071,
+      "segmentation_score": 0.6090609431266785,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0004611545138888889,
+      "box": [
+        0.4114583333333333,
+        0.3020833333333333,
+        0.6666666666666666,
+        0.8072916666666666
+      ],
+      "timing": {
+        "preprocess_ms": 12.146833003498614,
+        "model_ms": 35.905999975511804,
+        "postprocess_ms": 0.831083016237244,
+        "pipeline_ms": 48.88391599524766
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-021-good.webp",
+        "prediction": "test-021-good-prediction.png",
+        "truth": "test-021-good-truth.png",
+        "heatmap": "test-021-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/015.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "47b88274eaa02f09a4ae3dd79637556b1481f338522b2d633e85bf5db9527bf4",
+      "score": 0.3942199796438217,
+      "classifier_score": 0.4339965879917145,
+      "segmentation_score": 0.35444337129592896,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.965833000838757,
+        "model_ms": 37.761874991701916,
+        "postprocess_ms": 0.6373329961206764,
+        "pipeline_ms": 52.36504098866135
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-022-good.webp",
+        "prediction": "test-022-good-prediction.png",
+        "truth": "test-022-good-truth.png",
+        "heatmap": "test-022-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/012.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "49ce82fbae10e0dc8466888c0faf742f414a583ff457bb8c98633f4481ec5090",
+      "score": 0.2923171669244766,
+      "classifier_score": 0.26235026121139526,
+      "segmentation_score": 0.322284072637558,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.124207995133474,
+        "model_ms": 38.80224999738857,
+        "postprocess_ms": 0.5478749808389693,
+        "pipeline_ms": 52.474332973361015
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-023-good.webp",
+        "prediction": "test-023-good-prediction.png",
+        "truth": "test-023-good-truth.png",
+        "heatmap": "test-023-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/004.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "f34d30f06f6969c8dbdaa0ab6efb3b040316b6c1e809086f89990b50ab3c9a6e",
+      "score": 0.5262046307325363,
+      "classifier_score": 0.4937290847301483,
+      "segmentation_score": 0.5586801767349243,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "review",
+      "mask_area_ratio": 0.0009765625,
+      "box": [
+        0.7083333333333334,
+        0.3489583333333333,
+        0.7447916666666666,
+        0.4166666666666667
+      ],
+      "timing": {
+        "preprocess_ms": 12.96620798530057,
+        "model_ms": 38.946792017668486,
+        "postprocess_ms": 0.542207999387756,
+        "pipeline_ms": 52.45520800235681
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-024-good.webp",
+        "prediction": "test-024-good-prediction.png",
+        "truth": "test-024-good-truth.png",
+        "heatmap": "test-024-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/018.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "f25c4a1b4a0a49dc29322badde1b88011067bcd8af89ed4c6563715528235f93",
+      "score": 0.39129821956157684,
+      "classifier_score": 0.3066473603248596,
+      "segmentation_score": 0.47594907879829407,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.20024998858571,
+        "model_ms": 37.48729202197865,
+        "postprocess_ms": 0.6328749877866358,
+        "pipeline_ms": 51.32041699835099
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-025-good.webp",
+        "prediction": "test-025-good-prediction.png",
+        "truth": "test-025-good-truth.png",
+        "heatmap": "test-025-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/007.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "857b68b699064f8ba4d88a25f55e4ce4a96808e4884a61ccf05913d9e037f2df",
+      "score": 0.34279145300388336,
+      "classifier_score": 0.36948826909065247,
+      "segmentation_score": 0.31609463691711426,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.416500005405396,
+        "model_ms": 38.494458014611155,
+        "postprocess_ms": 0.48491699271835387,
+        "pipeline_ms": 52.395875012734905
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-026-good.webp",
+        "prediction": "test-026-good-prediction.png",
+        "truth": "test-026-good-truth.png",
+        "heatmap": "test-026-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/016.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "a8b48fd4b3415db0d580716d74719947ca45ac41c09799856b7f488954e6bdb8",
+      "score": 0.9342512488365173,
+      "classifier_score": 0.9095181822776794,
+      "segmentation_score": 0.9589843153953552,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.11146375868055555,
+      "box": [
+        0.21354166666666666,
+        0.14583333333333334,
+        0.890625,
+        0.921875
+      ],
+      "timing": {
+        "preprocess_ms": 13.410499988822266,
+        "model_ms": 38.86425000382587,
+        "postprocess_ms": 0.6051670061424375,
+        "pipeline_ms": 52.87991699879058
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-027-good.webp",
+        "prediction": "test-027-good-prediction.png",
+        "truth": "test-027-good-truth.png",
+        "heatmap": "test-027-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/003.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "fb910df812448b4afe02ed8319ca1f6a41551b2715117b67a8b20aca97de20e2",
+      "score": 0.5853746980428696,
+      "classifier_score": 0.7318457961082458,
+      "segmentation_score": 0.4389035999774933,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.174292020266876,
+        "model_ms": 37.32312499778345,
+        "postprocess_ms": 0.570082978811115,
+        "pipeline_ms": 51.06749999686144
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-028-good.webp",
+        "prediction": "test-028-good-prediction.png",
+        "truth": "test-028-good-truth.png",
+        "heatmap": "test-028-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/019.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "5ea04089ffa51059ddb13fea18ba94919f0e6211f3a57e68ee5d5021ca3567d0",
+      "score": 0.7678914368152618,
+      "classifier_score": 0.6162875890731812,
+      "segmentation_score": 0.9194952845573425,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.013319227430555556,
+      "box": [
+        0.22395833333333334,
+        0.11979166666666667,
+        0.90625,
+        0.8072916666666666
+      ],
+      "timing": {
+        "preprocess_ms": 12.908499978948385,
+        "model_ms": 38.15866599325091,
+        "postprocess_ms": 0.73441700078547,
+        "pipeline_ms": 51.80158297298476
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-029-good.webp",
+        "prediction": "test-029-good-prediction.png",
+        "truth": "test-029-good-truth.png",
+        "heatmap": "test-029-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/017.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "f1f7c32a6494161a55a2a5ab664d1e457f644b45601abf0997681b9607b600b5",
+      "score": 0.4445599466562271,
+      "classifier_score": 0.37096133828163147,
+      "segmentation_score": 0.5181585550308228,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "review",
+      "mask_area_ratio": 0.00043402777777777775,
+      "box": [
+        0.703125,
+        0.3802083333333333,
+        0.7239583333333334,
+        0.4114583333333333
+      ],
+      "timing": {
+        "preprocess_ms": 12.763417005771771,
+        "model_ms": 36.96166700683534,
+        "postprocess_ms": 0.5732499994337559,
+        "pipeline_ms": 50.29833401204087
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-030-good.webp",
+        "prediction": "test-030-good-prediction.png",
+        "truth": "test-030-good-truth.png",
+        "heatmap": "test-030-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/021.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "2322222a562c5cb49717047cff52535f57f073cff167d189a0500af08fba083e",
+      "score": 0.2934985011816025,
+      "classifier_score": 0.25439658761024475,
+      "segmentation_score": 0.3326004147529602,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.147916994057596,
+        "model_ms": 41.33633300079964,
+        "postprocess_ms": 0.4804170166607946,
+        "pipeline_ms": 54.96466701151803
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-031-good.webp",
+        "prediction": "test-031-good-prediction.png",
+        "truth": "test-031-good-truth.png",
+        "heatmap": "test-031-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/002.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "c915621335f2a306db55f3206c2a25c1ff31f4b1c6415b9717a5d5da9ec9ca78",
+      "score": 0.3938363492488861,
+      "classifier_score": 0.44079095125198364,
+      "segmentation_score": 0.3468817472457886,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 14.437540987273678,
+        "model_ms": 40.65433400683105,
+        "postprocess_ms": 0.6081660103518516,
+        "pipeline_ms": 55.70004100445658
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-032-good.webp",
+        "prediction": "test-032-good-prediction.png",
+        "truth": "test-032-good-truth.png",
+        "heatmap": "test-032-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/008.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "0da48d793b213d9b406239afbb84f542bf03b789a050641b8f3b653b0334330d",
+      "score": 0.5917611122131348,
+      "classifier_score": 0.6458859443664551,
+      "segmentation_score": 0.5376362800598145,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 12.94287500786595,
+        "model_ms": 36.58774998621084,
+        "postprocess_ms": 0.5853339971508831,
+        "pipeline_ms": 50.11595899122767
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-033-good.webp",
+        "prediction": "test-033-good-prediction.png",
+        "truth": "test-033-good-truth.png",
+        "heatmap": "test-033-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/006.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "124fadcde5acffe8bf4f9d7b40915fea23af50a5c5bd731773a947a3771f074f",
+      "score": 0.490011602640152,
+      "classifier_score": 0.4806939363479614,
+      "segmentation_score": 0.49932926893234253,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "review",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 12.904125003842637,
+        "model_ms": 37.16883299057372,
+        "postprocess_ms": 0.5520000122487545,
+        "pipeline_ms": 50.62495800666511
+      },
+      "correct": 0,
+      "assets": {
+        "image": "test-034-good.webp",
+        "prediction": "test-034-good-prediction.png",
+        "truth": "test-034-good-truth.png",
+        "heatmap": "test-034-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/020.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "f59dbe04cc8dedb211ce64256007c4c5b266f6439919f1a677e3b32a2180b127",
+      "score": 0.3632582873106003,
+      "classifier_score": 0.27871590852737427,
+      "segmentation_score": 0.4478006660938263,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 12.858667003456503,
+        "model_ms": 35.63299999223091,
+        "postprocess_ms": 0.7165000133682042,
+        "pipeline_ms": 49.208167009055614
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-035-good.webp",
+        "prediction": "test-035-good-prediction.png",
+        "truth": "test-035-good-truth.png",
+        "heatmap": "test-035-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/011.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "79283964b757e67af9699abc3ffc26ad45d4aeed5de0b0f9b7fb6cac3d2dae0d",
+      "score": 0.39371851086616516,
+      "classifier_score": 0.3860371708869934,
+      "segmentation_score": 0.4013998508453369,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 12.806625018129125,
+        "model_ms": 35.63216599286534,
+        "postprocess_ms": 0.43516699224710464,
+        "pipeline_ms": 48.87395800324157
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-036-good.webp",
+        "prediction": "test-036-good-prediction.png",
+        "truth": "test-036-good-truth.png",
+        "heatmap": "test-036-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/good/005.png",
+      "original_split": "test",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "3562e63b3a22cea2a66eb48ce81ff20bf908d2fe1d2c3c585eafe3b28f72330b",
+      "score": 0.2770475447177887,
+      "classifier_score": 0.2580154538154602,
+      "segmentation_score": 0.2960796356201172,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 12.9458750016056,
+        "model_ms": 35.52125001442619,
+        "postprocess_ms": 0.6811659841332585,
+        "pipeline_ms": 49.148291000165045
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-037-good.webp",
+        "prediction": "test-037-good-prediction.png",
+        "truth": "test-037-good-truth.png",
+        "heatmap": "test-037-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/scratch/010.png",
+      "original_split": "test",
+      "kind": "scratch",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/scratch/010_mask.png",
+      "sha256": "49b7f5e443fc22fb47ce7edf303623893e7791c2687213e98f9a2d80579e83ea",
+      "score": 0.9450688362121582,
+      "classifier_score": 0.9497866630554199,
+      "segmentation_score": 0.9403510093688965,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.1755099826388889,
+      "box": [
+        0.08333333333333333,
+        0.08333333333333333,
+        0.8802083333333334,
+        0.8854166666666666
+      ],
+      "timing": {
+        "preprocess_ms": 12.806750019080937,
+        "model_ms": 35.06858300534077,
+        "postprocess_ms": 0.48249997780658305,
+        "pipeline_ms": 48.35783300222829
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-038-scratch.webp",
+        "prediction": "test-038-scratch-prediction.png",
+        "truth": "test-038-scratch-truth.png",
+        "heatmap": "test-038-scratch-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/scratch/018.png",
+      "original_split": "test",
+      "kind": "scratch",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/scratch/018_mask.png",
+      "sha256": "ea3d0bb29b54e1d6d2737119e36db55b927d96f33574072714554013d10687fe",
+      "score": 0.9388028979301453,
+      "classifier_score": 0.91637122631073,
+      "segmentation_score": 0.9612345695495605,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.09917534722222222,
+      "box": [
+        0.09895833333333333,
+        0.07291666666666667,
+        0.8854166666666666,
+        0.9375
+      ],
+      "timing": {
+        "preprocess_ms": 12.519250012701377,
+        "model_ms": 36.898583988659084,
+        "postprocess_ms": 0.5300410266499966,
+        "pipeline_ms": 49.94787502801046
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-039-scratch.webp",
+        "prediction": "test-039-scratch-prediction.png",
+        "truth": "test-039-scratch-truth.png",
+        "heatmap": "test-039-scratch-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/scratch/006.png",
+      "original_split": "test",
+      "kind": "scratch",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/scratch/006_mask.png",
+      "sha256": "322e04476d3f7221ea358a56023d84fc9c911311c51364274624562aee11e053",
+      "score": 0.5754396319389343,
+      "classifier_score": 0.2885593771934509,
+      "segmentation_score": 0.8623198866844177,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.019938151041666668,
+      "box": [
+        0.23958333333333334,
+        0.16666666666666666,
+        0.8697916666666666,
+        0.8489583333333334
+      ],
+      "timing": {
+        "preprocess_ms": 11.920583987375721,
+        "model_ms": 34.27600002032705,
+        "postprocess_ms": 0.742000003810972,
+        "pipeline_ms": 46.93858401151374
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-040-scratch.webp",
+        "prediction": "test-040-scratch-prediction.png",
+        "truth": "test-040-scratch-truth.png",
+        "heatmap": "test-040-scratch-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/scratch/002.png",
+      "original_split": "test",
+      "kind": "scratch",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/scratch/002_mask.png",
+      "sha256": "7af3ba2320c1e556b9cef658ab7cdc8fb4deed8d47046e88bedca416963dd10d",
+      "score": 0.7002301216125488,
+      "classifier_score": 0.7421994805335999,
+      "segmentation_score": 0.6582607626914978,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0004611545138888889,
+      "box": [
+        0.5104166666666666,
+        0.328125,
+        0.8854166666666666,
+        0.671875
+      ],
+      "timing": {
+        "preprocess_ms": 11.79124999907799,
+        "model_ms": 34.32383399922401,
+        "postprocess_ms": 0.7669159967917949,
+        "pipeline_ms": 46.88199999509379
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-041-scratch.webp",
+        "prediction": "test-041-scratch-prediction.png",
+        "truth": "test-041-scratch-truth.png",
+        "heatmap": "test-041-scratch-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/scratch/008.png",
+      "original_split": "test",
+      "kind": "scratch",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/scratch/008_mask.png",
+      "sha256": "30ac7ac55063799af7e2c74e3280a21c8a01e69b63a322bae87d1fc7a6451057",
+      "score": 0.881367564201355,
+      "classifier_score": 0.9334198832511902,
+      "segmentation_score": 0.8293152451515198,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.028076171875,
+      "box": [
+        0.2864583333333333,
+        0.21354166666666666,
+        0.8177083333333334,
+        0.9322916666666666
+      ],
+      "timing": {
+        "preprocess_ms": 11.350165994372219,
+        "model_ms": 34.59070899407379,
+        "postprocess_ms": 0.6659580103587359,
+        "pipeline_ms": 46.60683299880475
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-042-scratch.webp",
+        "prediction": "test-042-scratch-prediction.png",
+        "truth": "test-042-scratch-truth.png",
+        "heatmap": "test-042-scratch-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/test/scratch/012.png",
+      "original_split": "test",
+      "kind": "scratch",
+      "label": 1,
+      "split": "test",
+      "mask": "metal_nut/ground_truth/scratch/012_mask.png",
+      "sha256": "379e758f1128d6ef8b3d4da610a456f7568c08153e69ab6f22908a62d0e996dd",
+      "score": 0.9094527661800385,
+      "classifier_score": 0.9505234360694885,
+      "segmentation_score": 0.8683820962905884,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 1,
+      "action": "reject",
+      "mask_area_ratio": 0.0832248263888889,
+      "box": [
+        0.125,
+        0.08854166666666667,
+        0.9010416666666666,
+        0.8958333333333334
+      ],
+      "timing": {
+        "preprocess_ms": 11.727667006198317,
+        "model_ms": 34.09149998333305,
+        "postprocess_ms": 0.5002079997211695,
+        "pipeline_ms": 46.31937498925254
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-043-scratch.webp",
+        "prediction": "test-043-scratch-prediction.png",
+        "truth": "test-043-scratch-truth.png",
+        "heatmap": "test-043-scratch-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/141.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "32287cd020196640384329e9a56ca77c57fe7027af0ef13b406d7dbf2985b7b4",
+      "score": 0.3557027727365494,
+      "classifier_score": 0.3957635164260864,
+      "segmentation_score": 0.31564202904701233,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.430250015109777,
+        "model_ms": 32.06974998465739,
+        "postprocess_ms": 0.5145840113982558,
+        "pipeline_ms": 44.014584011165425
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-044-good.webp",
+        "prediction": "test-044-good-prediction.png",
+        "truth": "test-044-good-truth.png",
+        "heatmap": "test-044-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/064.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "2df33534d618f0c6cf20693852440d15c17c705abbb588ab66282af4a069f620",
+      "score": 0.2303406149148941,
+      "classifier_score": 0.19676673412322998,
+      "segmentation_score": 0.2639144957065582,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.736582993762568,
+        "model_ms": 32.83741700579412,
+        "postprocess_ms": 0.5435829807538539,
+        "pipeline_ms": 45.117582980310544
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-045-good.webp",
+        "prediction": "test-045-good-prediction.png",
+        "truth": "test-045-good-truth.png",
+        "heatmap": "test-045-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/135.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "6eabadd622d32fdb295b0731400503fccedeff784cd6f458290c2d2f1615853b",
+      "score": 0.2673892378807068,
+      "classifier_score": 0.20428520441055298,
+      "segmentation_score": 0.3304932713508606,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.722833995008841,
+        "model_ms": 33.632083010161296,
+        "postprocess_ms": 0.5185829941183329,
+        "pipeline_ms": 45.87349999928847
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-046-good.webp",
+        "prediction": "test-046-good-prediction.png",
+        "truth": "test-046-good-truth.png",
+        "heatmap": "test-046-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/119.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "66123182f57e4f4119543e3bee80ce013de2499172d52926e2f5d7a03abe9ca3",
+      "score": 0.4310894310474396,
+      "classifier_score": 0.4203118085861206,
+      "segmentation_score": 0.44186705350875854,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.183458002051339,
+        "model_ms": 34.305542008951306,
+        "postprocess_ms": 0.463333009975031,
+        "pipeline_ms": 45.952333020977676
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-047-good.webp",
+        "prediction": "test-047-good-prediction.png",
+        "truth": "test-047-good-truth.png",
+        "heatmap": "test-047-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/206.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "a68329033fd70dc7df1bde3a88e1a2af43217f842a7b32cdd6244c6f954e45c6",
+      "score": 0.2930663749575615,
+      "classifier_score": 0.18826480209827423,
+      "segmentation_score": 0.39786794781684875,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.92637498024851,
+        "model_ms": 33.38175002136268,
+        "postprocess_ms": 0.44674999662674963,
+        "pipeline_ms": 45.75487499823794
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-048-good.webp",
+        "prediction": "test-048-good-prediction.png",
+        "truth": "test-048-good-truth.png",
+        "heatmap": "test-048-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/097.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "cfd38b52d549430a0c5189a13a8afdc58267abff4481d5c0b520d0f23b695548",
+      "score": 0.33818408846855164,
+      "classifier_score": 0.3045777380466461,
+      "segmentation_score": 0.37179043889045715,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.712833987781778,
+        "model_ms": 32.82737502013333,
+        "postprocess_ms": 0.6224579992704093,
+        "pipeline_ms": 44.16266700718552
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-049-good.webp",
+        "prediction": "test-049-good-prediction.png",
+        "truth": "test-049-good-truth.png",
+        "heatmap": "test-049-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/098.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "2eeb377562302c3c37fdd80f404152df27506dacc8bae769949e689f37274861",
+      "score": 0.3373999744653702,
+      "classifier_score": 0.33217161893844604,
+      "segmentation_score": 0.3426283299922943,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.771958011901006,
+        "model_ms": 32.97425000346266,
+        "postprocess_ms": 0.5440829845611006,
+        "pipeline_ms": 44.290290999924764
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-050-good.webp",
+        "prediction": "test-050-good-prediction.png",
+        "truth": "test-050-good-truth.png",
+        "heatmap": "test-050-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/016.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "51359f0e47f707502c6a5abba600da10d8e93ddc0bb5b8109e290f14fe10071b",
+      "score": 0.2845691069960594,
+      "classifier_score": 0.18934909999370575,
+      "segmentation_score": 0.3797891139984131,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.723999992478639,
+        "model_ms": 32.8634160105139,
+        "postprocess_ms": 0.4665000014938414,
+        "pipeline_ms": 44.05391600448638
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-051-good.webp",
+        "prediction": "test-051-good-prediction.png",
+        "truth": "test-051-good-truth.png",
+        "heatmap": "test-051-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/152.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "e903936e95194d53eced837e67eb04253ec925bbf129e42e51cee760514b3005",
+      "score": 0.47178733348846436,
+      "classifier_score": 0.5963431000709534,
+      "segmentation_score": 0.34723156690597534,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "review",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.542084015673026,
+        "model_ms": 37.41854100371711,
+        "postprocess_ms": 0.4988339787814766,
+        "pipeline_ms": 49.45945899817161
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-052-good.webp",
+        "prediction": "test-052-good-prediction.png",
+        "truth": "test-052-good-truth.png",
+        "heatmap": "test-052-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/108.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "0c964fdf4eb572cab3c09a08737a5d2b360c2f53787afecb7e467c464f4c5815",
+      "score": 0.36973772943019867,
+      "classifier_score": 0.22005298733711243,
+      "segmentation_score": 0.5194224715232849,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.939333005808294,
+        "model_ms": 33.00120899803005,
+        "postprocess_ms": 0.5372909945435822,
+        "pipeline_ms": 44.47783299838193
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-053-good.webp",
+        "prediction": "test-053-good-prediction.png",
+        "truth": "test-053-good-truth.png",
+        "heatmap": "test-053-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/174.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "bd77470063d954449625d77a40d9bdd31e6f8eaf1c08b477dda0bc0eab9182db",
+      "score": 0.27284593880176544,
+      "classifier_score": 0.19008249044418335,
+      "segmentation_score": 0.35560938715934753,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.811042011482641,
+        "model_ms": 33.04683297756128,
+        "postprocess_ms": 0.3774590149987489,
+        "pipeline_ms": 44.23533400404267
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-054-good.webp",
+        "prediction": "test-054-good-prediction.png",
+        "truth": "test-054-good-truth.png",
+        "heatmap": "test-054-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/202.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "d63168d6beaf6349af0ad79c08606e8fa09bcb2fddd288586a8b9008441cf650",
+      "score": 0.27390003949403763,
+      "classifier_score": 0.19364847242832184,
+      "segmentation_score": 0.3541516065597534,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.978667007293552,
+        "model_ms": 33.12091599218547,
+        "postprocess_ms": 0.6097500154282898,
+        "pipeline_ms": 44.709333014907315
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-055-good.webp",
+        "prediction": "test-055-good-prediction.png",
+        "truth": "test-055-good-truth.png",
+        "heatmap": "test-055-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/040.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "0a0b2282bed006f89e16f127f822f4bae54fd3703971ec4254db9e702b0f13a9",
+      "score": 0.3275695890188217,
+      "classifier_score": 0.27208271622657776,
+      "segmentation_score": 0.3830564618110657,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.602416994515806,
+        "model_ms": 32.75908299838193,
+        "postprocess_ms": 0.4229170153848827,
+        "pipeline_ms": 43.78441700828262
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-056-good.webp",
+        "prediction": "test-056-good-prediction.png",
+        "truth": "test-056-good-truth.png",
+        "heatmap": "test-056-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/160.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "40a364f15b15db754e4a8b04e12c9044c67829c1e392a9d49e2c0fe550c106b9",
+      "score": 0.35751090943813324,
+      "classifier_score": 0.2606733739376068,
+      "segmentation_score": 0.45434844493865967,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.193124984856695,
+        "model_ms": 33.63175000413321,
+        "postprocess_ms": 0.39733300218358636,
+        "pipeline_ms": 45.22220799117349
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-057-good.webp",
+        "prediction": "test-057-good-prediction.png",
+        "truth": "test-057-good-truth.png",
+        "heatmap": "test-057-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/039.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "c6d2624e524e5f0e7328e155b82614baf5706d296fc7cd69526ca7b0c6392a4b",
+      "score": 0.28652019798755646,
+      "classifier_score": 0.2609252631664276,
+      "segmentation_score": 0.3121151328086853,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.524250013986602,
+        "model_ms": 32.33962500235066,
+        "postprocess_ms": 0.3868329804390669,
+        "pipeline_ms": 43.25070799677633
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-058-good.webp",
+        "prediction": "test-058-good-prediction.png",
+        "truth": "test-058-good-truth.png",
+        "heatmap": "test-058-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/028.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "9887becf80cc3e42cba8cefe698f2384232bc80f301327f12a83686f942a29eb",
+      "score": 0.2800569534301758,
+      "classifier_score": 0.25251683592796326,
+      "segmentation_score": 0.3075970709323883,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.650458018062636,
+        "model_ms": 36.71749998466112,
+        "postprocess_ms": 0.44995901407673955,
+        "pipeline_ms": 47.81791701680049
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-059-good.webp",
+        "prediction": "test-059-good-prediction.png",
+        "truth": "test-059-good-truth.png",
+        "heatmap": "test-059-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/012.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "35db47656473bd482a6d23fd048346f58fa7b3ca3ce5f4e70351d984c281d055",
+      "score": 0.2512587085366249,
+      "classifier_score": 0.1849214881658554,
+      "segmentation_score": 0.3175959289073944,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.567457986529917,
+        "model_ms": 31.744334002723917,
+        "postprocess_ms": 0.5553330120164901,
+        "pipeline_ms": 43.867125001270324
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-060-good.webp",
+        "prediction": "test-060-good-prediction.png",
+        "truth": "test-060-good-truth.png",
+        "heatmap": "test-060-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/193.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "32d11a382eb4188b5ad5de0b538c8a0478538b4dece9abe6eedc5bea43603b8d",
+      "score": 0.2429247498512268,
+      "classifier_score": 0.1895061731338501,
+      "segmentation_score": 0.2963433265686035,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 11.262791987974197,
+        "model_ms": 33.13258299021982,
+        "postprocess_ms": 0.4755420086439699,
+        "pipeline_ms": 44.87091698683798
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-061-good.webp",
+        "prediction": "test-061-good-prediction.png",
+        "truth": "test-061-good-truth.png",
+        "heatmap": "test-061-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/023.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "6c69e056e2ffe41f60efe4fc077e96bdd3f3f3b9df1479e71abba1a65f0b5fe5",
+      "score": 0.32173292338848114,
+      "classifier_score": 0.26576119661331177,
+      "segmentation_score": 0.3777046501636505,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.727332992246374,
+        "model_ms": 34.126584010664374,
+        "postprocess_ms": 0.4023750079795718,
+        "pipeline_ms": 45.25629201089032
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-062-good.webp",
+        "prediction": "test-062-good-prediction.png",
+        "truth": "test-062-good-truth.png",
+        "heatmap": "test-062-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/126.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "c7edc89cf9e3d3028acb0653049d79dfad39e5dec13161e9624ac9d714fa33ab",
+      "score": 0.3794090375304222,
+      "classifier_score": 0.21715442836284637,
+      "segmentation_score": 0.541663646697998,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 10.890000005019829,
+        "model_ms": 79.71687501412816,
+        "postprocess_ms": 4.312082979595289,
+        "pipeline_ms": 94.91895799874328
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-063-good.webp",
+        "prediction": "test-063-good-prediction.png",
+        "truth": "test-063-good-truth.png",
+        "heatmap": "test-063-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/130.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "6e611145040e64a7521a0d4ef031ed2986b212c579f9409e2112a6dcffb83200",
+      "score": 0.3216317892074585,
+      "classifier_score": 0.204037606716156,
+      "segmentation_score": 0.439225971698761,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 13.85229200241156,
+        "model_ms": 54.78566698729992,
+        "postprocess_ms": 0.7034160080365837,
+        "pipeline_ms": 69.34137499774806
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-064-good.webp",
+        "prediction": "test-064-good-prediction.png",
+        "truth": "test-064-good-truth.png",
+        "heatmap": "test-064-good-heat.png"
+      }
+    },
+    {
+      "path": "metal_nut/train/good/035.png",
+      "original_split": "train",
+      "kind": "good",
+      "label": 0,
+      "split": "test",
+      "mask": null,
+      "sha256": "a128b75f1d5ae82934083045af316743b401cfbd4de16c0763fe83d671d47ac5",
+      "score": 0.3180103600025177,
+      "classifier_score": 0.3121395409107208,
+      "segmentation_score": 0.3238811790943146,
+      "score_source": "fused",
+      "threshold": 0.4884294867515564,
+      "pixel_threshold": 0.7000000000000002,
+      "predicted_label": 0,
+      "action": "pass",
+      "mask_area_ratio": 0.0,
+      "box": null,
+      "timing": {
+        "preprocess_ms": 12.193834001664072,
+        "model_ms": 35.313415981363505,
+        "postprocess_ms": 0.4587500006891787,
+        "pipeline_ms": 47.965999983716756
+      },
+      "correct": 1,
+      "assets": {
+        "image": "test-065-good.webp",
+        "prediction": "test-065-good-prediction.png",
+        "truth": "test-065-good-truth.png",
+        "heatmap": "test-065-good-heat.png"
+      }
+    }
+  ]
+}
